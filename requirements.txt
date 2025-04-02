@@ -3,11 +3,6 @@ pandas
 plotly
 streamlit_player
 geopandas
-#ipyleaflet
 streamlit_folium
 pydeck
-folium
-streamlit_pannellum
-libxmp
-pyproj
-json
+plotly_calplot
