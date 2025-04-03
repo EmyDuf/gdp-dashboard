@@ -37,9 +37,11 @@ import geopandas as gpd
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(layout="wide",    page_title='Hackaviz 2025 : La Garonne',
-    page_icon=':ocean:',) # This is an emoji shortcode. Could be a URL too.)
+    page_icon=':ocean:',initial_sidebar_state='collapsed',) # This is an emoji shortcode. Could be a URL too.)
 #@m = folium.Map(location=[43.59966,1.44043,], zoom_start=11, tiles='OpenStreetMap')
 #folium_static(m)
+
+
 
 # Primary accent for interactive elements
 primaryColor = '#d33682'
