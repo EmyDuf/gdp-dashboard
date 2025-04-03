@@ -502,11 +502,11 @@ with tab4:
     video_url = "https://soundcloud.com/ocie-elliott/like-a-river?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
     st_player(video_url) #, subtitles="subtitles.vtt" subtitles="subtitles.vtt"Interessant d'avoir le texte qui défile ! 
 
-    st.markdown(":gray-badge[+4°C en 2100]  Trajectoire de réchauffement de référence pour l’adaptation au changement climatique (TRACC)")
+    #st.markdown(":gray-badge[+4°C en 2100]  Trajectoire de réchauffement de référence pour l’adaptation au changement climatique (TRACC)")
 
-    st.markdown("   :red-badge[🌨️ +15 %] les pluies intenses à prévoir, aggravant le risque d'inondation")
-    st.markdown("   :orange-badge[🌡️ +1,5 °C] c'est la variation de la température moyenne enregistrée en 50 ans sur les Pyrénées (Source : Observatoire pyrénéen du changement climatique)")
-    st.markdown("   :orange-badge[🌄 1/2] les glaciers pyrénéens la moitié d’entre eux ont disparu ces 35 dernières années. Le stock de neige faiblira drastiquement au printemps dans les Pyrénées dans le scénario")
+    #st.markdown("   :red-badge[🌨️ +15 %] les pluies intenses à prévoir, aggravant le risque d'inondation")
+    #st.markdown("   :orange-badge[🌡️ +1,5 °C] c'est la variation de la température moyenne enregistrée en 50 ans sur les Pyrénées (Source : Observatoire pyrénéen du changement climatique)")
+    #st.markdown("   :orange-badge[🌄 1/2] les glaciers pyrénéens la moitié d’entre eux ont disparu ces 35 dernières années. Le stock de neige faiblira drastiquement au printemps dans les Pyrénées dans le scénario")
 
 
 #data
