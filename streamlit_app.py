@@ -277,7 +277,7 @@ with tab0:
         "Choose Map Style:",
         options=["mapbox://styles/mapbox/outdoors-v11", "light", "dark", "satellite", "road","mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy"],
         format_func=str.capitalize,
-        placeholder="light", #mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy
+        placeholder="mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy", #mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy
     )
 
     pp = pdk.Deck(initial_view_state=view_state,
