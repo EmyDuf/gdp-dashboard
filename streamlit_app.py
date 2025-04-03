@@ -275,9 +275,9 @@ with tab0:
 
     mapstyle = st.sidebar.selectbox(
         "Choose Map Style:",
-        options=["mapbox://styles/mapbox/outdoors-v11", "light", "dark", "satellite", "road","mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy"],
+        options=["mapbox://styles/mapbox/outdoors-v11", "light", "dark", "satellite", "road"],
         format_func=str.capitalize,
-        placeholder="mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy", #mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy
+        placeholder="mapbox://styles/mapbox/outdoors-v11", #mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy
     )
 
     pp = pdk.Deck(initial_view_state=view_state,
