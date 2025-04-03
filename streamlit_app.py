@@ -19,6 +19,12 @@ import pydeck as pdk
 #import folium
 #import streamlit_pannellum
 #from streamlit_pannellum import streamlit_pannellum
+#import dash_pannellum
+
+#import dash
+#from dash import html
+#import dash_pannellum
+
 from plotly.subplots import make_subplots
 from plotly_calplot import calplot
 #libxmp #ipyleaflet #pyproj #json #folium
@@ -185,10 +191,6 @@ selected_station = st.sidebar.multiselect('Quelle station souhaitez-vous regarde
 #,'O082001001''O200008001' and , 'O200004001' is not part of the options
 #['MURET','MANCIOUX','ROQUEFORT-SUR-GARONNE','MURET','FOIX','CALMONT','AUTERIVE','AUTERIVE','PORTET-SUR-GARONNE','TOULOUSE'
 
-# Filtrer gros débit
-#all = st.sidebar.checkbox("Au dessus de 1 500 000 l/s soit le débit qui peut emporter une maison ou détruire les fondations", value=True) #.query("debit_moyen_journalier>1500000.0")
-
-
 
 #st.title('Split steps of the story')
 tab0, tab1, tab2, tab3, tab4 = st.tabs([ "Affluents", "Débit", "Hauteur de crue", "Pluviométrie", "S'ambiancer"])
@@ -209,14 +211,21 @@ with tab0:
 
 
 
-
     view_state = pdk.ViewState(latitude=43.29966,
                             longitude=1.36743,
-                            zoom=9,
-                            pitch=60,bearing=190 )
+                            zoom=9,pitch=60,bearing=190)
 
-    d1 = {'lon': [1.44043, 1.44043], 'lat': [43.59966, 43.59966], 'name':['Toulouse', ''], 'temp':[100,30],}
+    d1 = {'lon': [1.44043, 0.97392], 'lat': [43.59966, 43.154442], 'name':['Toulouse', 'Le Salat'], 'temp':[100,16],}
     df_map1 = pd.DataFrame(data=d1)
+
+    #MAPBOX_API_KEY= "pk.eyJ1IjoiZW1pMjAyMCIsImEiOiJjazRiaG8xY20wZHo1M25tbnF6amhyMnZwIn0.Y566I7K3rIBjF24gbDBbZQ"
+    #ELEVATION_DECODER = {"rScaler": 256, "gScaler": 1, "bScaler": 1 / 256, "offset": -32768}
+    #SURFACE_IMAGE =f"https://api.mapbox.com/v4/mapbox.satellite/{{z}}/{{x}}/{{y}}@2x.png?access_token={MAPBOX_API_KEY}"
+    #TERRAIN_IMAGE="https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
+    #terrain_layer = pdk.Layer( "TerrainLayer",
+    #            elevation_decoder=ELEVATION_DECODER,
+    #            texture=SURFACE_IMAGE,
+    #            elevation_data=TERRAIN_IMAGE)
 
     tooltip = {
         "html":
@@ -238,36 +247,40 @@ with tab0:
         pickable=True,
         onClick=True,
         filled=True,
-        line_width_min_pixels=20,
+        line_width_min_pixels=10,
         opacity=2,
+        #auto_highlight=True,
+        #elevation_scale=50,
+        #elevation_range=[0, 3000],
+        #extruded=True,                 
+        #coverage=1
     )
 
     layert1 = pdk.Layer(
         type="TextLayer",
         data=df_map1,
-        pickable=True,
+        pickable=False,
         get_position=["lon", "lat"],
         get_text="name",
-        get_size=900,
+        get_size=1200,
         sizeUnits='meters',
-        get_color=[10, 0, 0],
+        get_color="[10, 0, 0]",
         get_angle=0,
         # Note that string constants in pydeck are explicitly passed as strings
         # This distinguishes them from columns in a data set
-        getTextAnchor= '"middle"', #middle
+        getTextAnchor= '"end"', #'"start"', #middle
         get_alignment_baseline='"bottom"', #top center "bottom"
         get_radius=200,
     )
 
     mapstyle = st.sidebar.selectbox(
         "Choose Map Style:",
-        options=["mapbox://styles/emi2020/cm8arzmix00g201s36ex4bwtl","mapbox://styles/mapbox/outdoors-v11", "light", "dark", "satellite", "road"],
+        options=["mapbox://styles/mapbox/outdoors-v11", "light", "dark", "satellite", "road","mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy"],
         format_func=str.capitalize,
-        placeholder="mapbox://styles/emi2020/cm8arzmix00g201s36ex4bwtl",
+        placeholder="light", #mapbox://styles/emi2020/cm91i229e008901sdbx6i5scy
     )
 
-    pp = pdk.Deck(
-        initial_view_state=view_state,
+    pp = pdk.Deck(initial_view_state=view_state,
         map_provider='mapbox',
         map_style=f"{mapstyle}" ,  # 'light', 'dark', 'satellite', 'road' #pdk.map_styles.mapstyle, #"light", "dark", "satellite", "road"
         layers=[
@@ -278,6 +291,7 @@ with tab0:
     )
 
     deckchart = st.pydeck_chart(pp)
+
 
 
 with tab1:
@@ -488,6 +502,11 @@ with tab4:
     video_url = "https://soundcloud.com/ocie-elliott/like-a-river?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
     st_player(video_url) #, subtitles="subtitles.vtt" subtitles="subtitles.vtt"Interessant d'avoir le texte qui défile ! 
 
+    st.markdown(":gray-badge[+4°C en 2100]  Trajectoire de réchauffement de référence pour l’adaptation au changement climatique (TRACC)")
+
+    st.markdown("   :red-badge[🌨️ +15 %] les pluies intenses à prévoir, aggravant le risque d'inondation")
+    st.markdown("   :orange-badge[🌡️ +1,5 °C] c'est la variation de la température moyenne enregistrée en 50 ans sur les Pyrénées (Source : Observatoire pyrénéen du changement climatique)")
+    st.markdown("   :orange-badge[🌄 1/2] les glaciers pyrénéens la moitié d’entre eux ont disparu ces 35 dernières années. Le stock de neige faiblira drastiquement au printemps dans les Pyrénées dans le scénario")
 
 
 #data
