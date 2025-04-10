@@ -383,7 +383,6 @@ with tab1:
         column_config={"code_crue": st.column_config.TextColumn("code_crue")},
     )
 
-    
 
 with tab2:
     # Instead of a CSV on disk, you could read from an HTTP endpoint here too.
@@ -459,8 +458,7 @@ with tab3:
     if not len(station_pluv):
         st.warning("Selectionner au moins une station")
 
-    selected_station_pluv = st.sidebar.multiselect('Quelle station de pluviométrie souhaitez-vous regarder ?', station_pluv,  
-    ['31135001'])
+    selected_station_pluv = st.sidebar.multiselect('Quelle station de pluviométrie souhaitez-vous regarder ?', station_pluv,  ['31135001','31517001','31190001','31144001','31085400','31085400'])
 
     df_filtered_pluv = gdp_df_pluv[(gdp_df_pluv["code_pluviometre"].isin(selected_station_pluv)) & (gdp_df_haut["code_crue"].between(from_year, to_year))]
 
@@ -471,7 +469,7 @@ with tab3:
     fig_pluv0.update_layout(showlegend=True)
     st.plotly_chart(fig_pluv0)
 
-    fig_pluv2 = px.scatter_mapbox(df_filtered_pluv.query("precipitation>0").query("code_crue==2022"), lat="latitude", lon="longitude", color="precipitation", size="precipitation", 
+    fig_pluv2 = px.scatter_mapbox(gdp_df_pluv.query("precipitation>0").query("code_crue==2022"), lat="latitude", lon="longitude", color="precipitation", size="precipitation", 
                             title = "9 janvier : J-2 avant la crue du 11 janvier 2022 de fortes précipitations", color_continuous_scale='teal',
                             #radius=200, #["orange", "blue"],  #.query("date_prod_year>1000") colors.cyclical.IceFire color="puiss_total_elec", size="puiss_total_elec", color_continuous_scale=["blue", "red"],
                             hover_data=['date_observation'], #labels={'code_station'},
