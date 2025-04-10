@@ -215,7 +215,7 @@ with tab0:
 
     view_state = pdk.ViewState(latitude=43.29966,
                             longitude=1.36743,
-                            zoom=9,pitch=60,bearing=190)
+                            zoom=9,pitch=60,bearing=180)
 
     d1 = {'lon': [1.44043, 0.97392], 'lat': [43.59966, 43.154442], 'name':['Toulouse', 'Le Salat'], 'temp':[100,16],}
     df_map1 = pd.DataFrame(data=d1)
@@ -457,6 +457,8 @@ with tab3:
     selected_station_pluv = st.sidebar.multiselect('Quelle station de pluviométrie souhaitez-vous regarder ?', station,  
     ['O125251001', 'O029003001', 'O059251001', 'O098401001', 'O166291001', 'O171251001', 'O171253001', 'O200001001'])
 
+    df_filtered_pluv = gdp_df_pluv[(gdp_df_pluv["code_pluviometre"].isin(selected_station_pluv)) & (gdp_df_haut["code_crue"].between(from_year, to_year))]
+
     fig_pluv0 = px.line(gdp_df_pluv.query("code_pluviometre == '31135001'"), y="precipitation", x="date_m_d", color="code_crue", hover_data=['code_crue'])
     fig_pluv0.for_each_annotation(lambda a: a.update(text=a.text.split("=")[1]))
     fig_pluv0.for_each_trace(lambda t: t.update(name=t.name.split("=")[0]))       
@@ -464,6 +466,23 @@ with tab3:
     fig_pluv0.update_layout(showlegend=True)
     st.plotly_chart(fig_pluv0)
 
+    fig_pluv2 = px.scatter_mapbox(gdp_df_pluv.query("precipitation>0").query("code_crue==2022"), lat="latitude", lon="longitude", color="precipitation", size="precipitation", 
+                            title = "9 janvier : J-2 avant la crue du 11 janvier 2022 de fortes précipitations", color_continuous_scale='teal',
+                            #radius=200, #["orange", "blue"],  #.query("date_prod_year>1000") colors.cyclical.IceFire color="puiss_total_elec", size="puiss_total_elec", color_continuous_scale=["blue", "red"],
+                            hover_data=['date_observation'], #labels={'code_station'},
+                            opacity = 1, size_max=300, zoom=8,
+                            mapbox_style="carto-positron",text="code_pluviometre",
+                            animation_frame="date_observation",
+                            #width=100, height=700, 
+                            range_color=[0, 253] ) #,range_color=[0, 3830137]
+    fig_pluv2.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, 
+                  mapbox=dict(
+                      pitch=60,
+                      bearing=180
+                  ))
+    st.plotly_chart(fig_pluv2)
+    #fig.show()
+    
     #['code_pluviometre','code_crue','date_observation'],
     #    'precipitation'
     #get_data_pluv = get_data_pluv.sort_values(by=['code_pluviometre', 'precipitation','code_crue'], ascending=False)
@@ -491,17 +510,6 @@ with tab3:
     )
     st.plotly_chart(fig_pluv1)
 
-    fig_pluv2 = px.scatter_mapbox(gdp_df_pluv.query("precipitation>0").query("code_crue==2022"), lat="latitude", lon="longitude", color="precipitation", size="precipitation", 
-                            title = "9 janvier : J-2 avant la crue du 11 janvier 2022 de fortes précipitations", color_continuous_scale='teal', #["orange", "blue"],  #.query("date_prod_year>1000") colors.cyclical.IceFire color="puiss_total_elec", size="puiss_total_elec", color_continuous_scale=["blue", "red"],
-                    hover_data=['date_observation'], #labels={'code_station'},
-                    opacity = 1, size_max=30, zoom=6.5,
-                    mapbox_style="carto-positron",text="code_pluviometre",
-                            animation_frame="date_observation",
-                    #width=100, height=700, 
-                    range_color=[0, 253] ) #,range_color=[0, 3830137]
-    st.plotly_chart(fig_pluv2)
-    #fig.show()
-    
     gdp_df_pluv
 
 with tab4:
