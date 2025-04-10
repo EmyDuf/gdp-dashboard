@@ -354,7 +354,6 @@ with tab1:
     st.plotly_chart(fig1)
 
 
-
     #fig2 = px.line(filtered_gdp_df_debit.query("code_station == 'O200001001'"), y="value", x="date_m_d", color="code_crue", color_discrete_sequence=px.colors.sequential.Magenta, hover_data='date_observation',facet_col='libelle_cours_eau' )
     #st.plotly_chart(fig2)
 
@@ -454,6 +453,16 @@ with tab2:
 with tab3:
     st.header("Pluviométrie", divider='gray')
     st.caption("Des pluies abondantes dans les Pyrénées. :ocean: :mountain: :cloud:  :snowflake: ")
+
+    selected_station_pluv = st.sidebar.multiselect('Quelle station de pluviométrie souhaitez-vous regarder ?', station,  
+    ['O125251001', 'O029003001', 'O059251001', 'O098401001', 'O166291001', 'O171251001', 'O171253001', 'O200001001'])
+
+    fig_pluv0 = px.line(gdp_df_pluv.query("code_pluviometre == '31135001'"), y="precipitation", x="date_m_d", color="code_crue", hover_data=['code_crue'])
+    fig_pluv0.for_each_annotation(lambda a: a.update(text=a.text.split("=")[1]))
+    fig_pluv0.for_each_trace(lambda t: t.update(name=t.name.split("=")[0]))       
+    fig_pluv0.update_layout(xaxis_title=None)
+    fig_pluv0.update_layout(showlegend=True)
+    st.plotly_chart(fig_pluv0)
 
     #['code_pluviometre','code_crue','date_observation'],
     #    'precipitation'
