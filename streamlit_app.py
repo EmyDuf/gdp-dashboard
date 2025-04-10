@@ -478,11 +478,11 @@ with tab3:
                             animation_frame="date_m_d",
                             #width=100, height=700, pitch=60, bearing=180,
                             range_color=[0, 253] ) #,range_color=[0, 3830137]
-    fig_pluv2.update_layout(#margin={"r":0,"t":0,"l":0,"b":0}, 
-                  mapbox=dict(
-                      #pitch=60,
-                      bearing=180
-                  ))
+    #fig_pluv2.update_layout(#margin={"r":0,"t":0,"l":0,"b":0}, 
+    #              mapbox=dict(
+    #                  #pitch=60,
+    #                  bearing=180
+    #              ))
 
     st.plotly_chart(fig_pluv2)
     #fig.show()
