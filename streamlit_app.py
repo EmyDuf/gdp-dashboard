@@ -473,16 +473,17 @@ with tab3:
                             title = "9 janvier : J-2 avant la crue du 11 janvier 2022 de fortes précipitations", color_continuous_scale='teal',
                             #radius=200, #["orange", "blue"],  #.query("date_prod_year>1000") colors.cyclical.IceFire color="puiss_total_elec", size="puiss_total_elec", color_continuous_scale=["blue", "red"],
                             hover_data=['date_observation'], #labels={'code_station'},
-                            opacity = 1, size_max=300, zoom=7.5,
+                            opacity = 1, size_max=60, zoom=7.5,
                             mapbox_style="carto-positron",text="code_pluviometre",
-                            animation_frame="date_observation",
+                            animation_frame="date_m_d",
                             #width=100, height=700, pitch=60, bearing=180,
                             range_color=[0, 253] ) #,range_color=[0, 3830137]
-    fig_pluv2.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, 
-                  mapbox=dict(
-                      #pitch=60,
-                      bearing=180
-                  ))
+    #fig_pluv2.update_layout(#margin={"r":0,"t":0,"l":0,"b":0}, 
+    #              mapbox=dict(
+    #                  #pitch=60,
+    #                  bearing=180
+    #              ))
+
     st.plotly_chart(fig_pluv2)
     #fig.show()
     
