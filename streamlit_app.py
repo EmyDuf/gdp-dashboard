@@ -476,7 +476,7 @@ with tab3:
                             opacity = 1, size_max=60, zoom=7.5,
                             mapbox_style="carto-positron",text="code_pluviometre",
                             animation_frame="date_m_d",
-                            #width=100, height=700, pitch=60, bearing=180,
+                            width=100, height=700, #pitch=60, bearing=180,
                             range_color=[0, 253] ) #,range_color=[0, 3830137]
     #fig_pluv2.update_layout(#margin={"r":0,"t":0,"l":0,"b":0}, 
     #              mapbox=dict(
