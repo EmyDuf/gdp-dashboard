@@ -454,19 +454,24 @@ with tab3:
     st.header("Pluviométrie", divider='gray')
     st.caption("Des pluies abondantes dans les Pyrénées. :ocean: :mountain: :cloud:  :snowflake: ")
 
-    selected_station_pluv = st.sidebar.multiselect('Quelle station de pluviométrie souhaitez-vous regarder ?', station,  
-    ['O125251001', 'O029003001', 'O059251001', 'O098401001', 'O166291001', 'O171251001', 'O171253001', 'O200001001'])
+    # Filter station
+    station_pluv = gdp_df_pluv['code_pluviometre'].unique()
+    if not len(station_pluv):
+        st.warning("Selectionner au moins une station")
+
+    selected_station_pluv = st.sidebar.multiselect('Quelle station de pluviométrie souhaitez-vous regarder ?', station_pluv,  
+    ['31135001'])
 
     df_filtered_pluv = gdp_df_pluv[(gdp_df_pluv["code_pluviometre"].isin(selected_station_pluv)) & (gdp_df_haut["code_crue"].between(from_year, to_year))]
 
-    fig_pluv0 = px.line(gdp_df_pluv.query("code_pluviometre == '31135001'"), y="precipitation", x="date_m_d", color="code_crue", hover_data=['code_crue'])
+    fig_pluv0 = px.line(df_filtered_pluv.query("code_pluviometre == '31135001'"), y="precipitation", x="date_m_d", color="code_crue", hover_data=['code_crue'])
     fig_pluv0.for_each_annotation(lambda a: a.update(text=a.text.split("=")[1]))
     fig_pluv0.for_each_trace(lambda t: t.update(name=t.name.split("=")[0]))       
     fig_pluv0.update_layout(xaxis_title=None)
     fig_pluv0.update_layout(showlegend=True)
     st.plotly_chart(fig_pluv0)
 
-    fig_pluv2 = px.scatter_mapbox(gdp_df_pluv.query("precipitation>0").query("code_crue==2022"), lat="latitude", lon="longitude", color="precipitation", size="precipitation", 
+    fig_pluv2 = px.scatter_mapbox(df_filtered_pluv.query("precipitation>0").query("code_crue==2022"), lat="latitude", lon="longitude", color="precipitation", size="precipitation", 
                             title = "9 janvier : J-2 avant la crue du 11 janvier 2022 de fortes précipitations", color_continuous_scale='teal',
                             #radius=200, #["orange", "blue"],  #.query("date_prod_year>1000") colors.cyclical.IceFire color="puiss_total_elec", size="puiss_total_elec", color_continuous_scale=["blue", "red"],
                             hover_data=['date_observation'], #labels={'code_station'},
@@ -493,7 +498,7 @@ with tab3:
     #from plotly_calplot import calplot
     # choosing a standard colorscale
     fig_pluv1 = calplot(
-        gdp_df_pluv.query("code_pluviometre == '31135001'"),
+        df_filtered_pluv.query("code_pluviometre == '31135001'"),
         x="date_observation",
         y="precipitation",
         gap=0,
@@ -510,7 +515,7 @@ with tab3:
     )
     st.plotly_chart(fig_pluv1)
 
-    gdp_df_pluv
+    df_filtered_pluv
 
 with tab4:
     st.write('''S'ambiancer''')
