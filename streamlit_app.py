@@ -268,8 +268,8 @@ streamlit_pannellum(
           #"height" : 400,
           "hotSpots": [
             {
-              "pitch": 15,
-              "yaw": -90,
+              "pitch": 0,
+              "yaw": -114.79,
               "type": "scene",
               "text": "Retourner au panorama.",
               "sceneId": "first"
