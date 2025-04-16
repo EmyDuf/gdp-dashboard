@@ -215,8 +215,8 @@ streamlit_pannellum(
           "extension": "jpg",
           #"author": "vue du pont neuf à Toulouse",
           "type": "equirectangular", #"multires",
-          "panorama": "https://hackaviz.sirv.com/Images/pont_neuf_v2.jpg",
-          #"preview": "/data/pont_neuf(1).jpg",
+          "panorama": "https://hackaviz.sirv.com/Images/pont_neuf_v2.jpg", #"https://hackaviz.sirv.com/Images/pont_neuf_v2.jpg",
+          "preview": "/data/pont_neuf_v2.jpg",
           "haov": 110, #149.87  panorama’s horizontal angle of view, in degrees. Defaults to 360
           "vaov": 70, #54.15  panorama’s vertical angle of view, in degrees. Defaults to 180
           "vOffset":-3, # vertical offset of the center of the equirectangular image from the horizon, in degrees. Defaults to 0
@@ -226,6 +226,8 @@ streamlit_pannellum(
           "hfov": 3, #zoom
           "minYaw" : -900,
           "maxYaw" : 90,
+          "width" : "8192",
+          "height" :"5402",
 
           #"author": "Emy",
           "hotSpots": [
