@@ -193,94 +193,6 @@ selected_station = st.sidebar.multiselect('Quelle station souhaitez-vous regarde
 #['MURET','MANCIOUX','ROQUEFORT-SUR-GARONNE','MURET','FOIX','CALMONT','AUTERIVE','AUTERIVE','PORTET-SUR-GARONNE','TOULOUSE'
 
 
-# Filtrer gros débit
-#all = st.sidebar.checkbox("Au dessus de 1 500 000 l/s soit le débit qui peut emporter une maison ou détruire les fondations", value=True) #.query("debit_moyen_journalier>1500000.0")
-#https://my.sirv.com/#/browse/Images?preview=%2FImages%2Fpont_neuf.jpg
-#Detail https://pannellum.org/documentation/reference/
-#DATA_FILENAME = Path(__file__).parent/'data/Photo360.jpg'
-
-
-
-streamlit_pannellum(
-    config={
-      "default": {
-        "firstScene": "first", #"circle",
-        "sceneFadeDuration": 1000
-      },
-      "scenes": {
-        "first": {
-          "title": "La Garonne",
-          "maxLevel": 120,
-          "compass":True,
-          "extension": "jpg",
-          #"author": "vue du pont neuf à Toulouse",
-          "type": "equirectangular", #"multires",
-          "panorama": "https://hackaviz.sirv.com/Images/pont_neuf_v3.jpg", #"https://hackaviz.sirv.com/Images/pont_neuf_v2.jpg",
-          "preview": "/data/pont_neuf_v2.jpg",
-          "haov": 110, #149.87  panorama’s horizontal angle of view, in degrees. Defaults to 360
-          "vaov": 70, #54.15  panorama’s vertical angle of view, in degrees. Defaults to 180
-          "vOffset":-3, # vertical offset of the center of the equirectangular image from the horizon, in degrees. Defaults to 0
-          "showZoomCtrl": True,
-          "orientationOnByDefault" : False,
-          "autoLoad": True,
-          "hfov": 3, #zoom
-          "minYaw" : -900,
-          "maxYaw" : 90,
-          "width" : "8192",
-          "height" :"5402",
-
-          #"author": "Emy",
-          "hotSpots": [
-            {
-              "pitch": 8.2,
-              "yaw": 15,
-              "type": "info",
-              #"haov": 110, #149.87  panorama’s horizontal angle of view, in degrees. Defaults to 360
-              #"vaov": 70,
-              "text": "Effet d'optique qui rend visible les Pyrénées à 120km de distance. Le phénomène, classique en hiver, est lié au vent du sud. Signe de sécheresse également ?",
-              "sceneId": "first",
-            },
-            {
-              "pitch": -10,
-              "yaw": -10.7,
-              "type": "info",
-              "text": "Le Pont Neuf date de 1544, ce qui fait de lui le plus Vieux pont de la Garonne. Les travaux ont durés un siècle où le chantier a été soumis à des crues dévastatrices et à un lit de la Garonne trompeur.",
-              "sceneId": "first",
-              #"targetPitch": -10,
-              #"targetYaw": -10.7
-            },
-            {
-              #"pitch": 0,
-              "yaw": -10,
-              "type": "scene",
-              "text": "Se situer",
-              "sceneId": "second"
-            }
-          ]
-        },
-        "second": {
-          #"compass":True,
-          #"title": "Le pont",
-          "type": "equirectangular", #"equirectangular",
-          "panorama": "https://hackaviz.sirv.com/Images/image_2.jpg",
-          #"preview": "/data/image_2.jpg",
-          "autoLoad": True,
-          "yaw":-90,
-          #"width" : 1000,
-          #"height" : 400,
-          "hotSpots": [
-            {
-              "pitch": 0,
-              "yaw": -114.79,
-              "type": "scene",
-              "text": "Retourner au panorama.",
-              "sceneId": "first"
-            }],
-
-        },
-    } 
-})
-
 #st.title('Split steps of the story')
 tab0, tab1, tab2, tab3, tab4 = st.tabs([ "Affluents", "Débit", "Hauteur de crue", "Pluviométrie", "S'ambiancer"])
 with tab0:
@@ -381,6 +293,92 @@ with tab0:
 
     deckchart = st.pydeck_chart(pp)
 
+
+    # Filtrer gros débit
+    #all = st.sidebar.checkbox("Au dessus de 1 500 000 l/s soit le débit qui peut emporter une maison ou détruire les fondations", value=True) #.query("debit_moyen_journalier>1500000.0")
+    #https://my.sirv.com/#/browse/Images?preview=%2FImages%2Fpont_neuf.jpg
+    #Detail https://pannellum.org/documentation/reference/
+    #DATA_FILENAME = Path(__file__).parent/'data/Photo360.jpg'
+
+    streamlit_pannellum(
+        config={
+        "default": {
+            "firstScene": "first", #"circle",
+            "sceneFadeDuration": 1000
+        },
+        "scenes": {
+            "first": {
+            "title": "La Garonne",
+            "maxLevel": 120,
+            "compass":True,
+            "extension": "jpg",
+            #"author": "vue du pont neuf à Toulouse",
+            "type": "equirectangular", #"multires",
+            "panorama": "https://hackaviz.sirv.com/Images/pont_neuf_v3.jpg", #"https://hackaviz.sirv.com/Images/pont_neuf_v2.jpg",
+            "preview": "/data/pont_neuf_v2.jpg",
+            "haov": 110, #149.87  panorama’s horizontal angle of view, in degrees. Defaults to 360
+            "vaov": 70, #54.15  panorama’s vertical angle of view, in degrees. Defaults to 180
+            "vOffset":-3, # vertical offset of the center of the equirectangular image from the horizon, in degrees. Defaults to 0
+            "showZoomCtrl": True,
+            "orientationOnByDefault" : False,
+            "autoLoad": True,
+            "hfov": 3, #zoom
+            "minYaw" : -900,
+            "maxYaw" : 90,
+            "width" : "8192",
+            "height" :"5402",
+
+            #"author": "Emy",
+            "hotSpots": [
+                {
+                "pitch": 8.2,
+                "yaw": 15,
+                "type": "info",
+                #"haov": 110, #149.87  panorama’s horizontal angle of view, in degrees. Defaults to 360
+                #"vaov": 70,
+                "text": "Effet d'optique qui rend visible les Pyrénées à 120km de distance. Le phénomène, classique en hiver, est lié au vent du sud. Signe de sécheresse également ?",
+                "sceneId": "first",
+                },
+                {
+                "pitch": -10,
+                "yaw": -10.7,
+                "type": "info",
+                "text": "Le Pont Neuf date de 1544, ce qui fait de lui le plus Vieux pont de la Garonne. Les travaux ont durés un siècle où le chantier a été soumis à des crues dévastatrices et à un lit de la Garonne trompeur.",
+                "sceneId": "first",
+                #"targetPitch": -10,
+                #"targetYaw": -10.7
+                },
+                {
+                #"pitch": 0,
+                "yaw": -10,
+                "type": "scene",
+                "text": "Se situer",
+                "sceneId": "second"
+                }
+            ]
+            },
+            "second": {
+            #"compass":True,
+            #"title": "Le pont",
+            "type": "equirectangular", #"equirectangular",
+            "panorama": "https://hackaviz.sirv.com/Images/image_2.jpg",
+            #"preview": "/data/image_2.jpg",
+            "autoLoad": True,
+            "yaw":-90,
+            #"width" : 1000,
+            #"height" : 400,
+            "hotSpots": [
+                {
+                "pitch": 0,
+                "yaw": -114.79,
+                "type": "scene",
+                "text": "Retourner au panorama.",
+                "sceneId": "first"
+                }],
+
+            },
+        } 
+    })
 
 
 with tab1:
@@ -561,7 +559,7 @@ with tab3:
                             #radius=200, #["orange", "blue"],  #.query("date_prod_year>1000") colors.cyclical.IceFire color="puiss_total_elec", size="puiss_total_elec", color_continuous_scale=["blue", "red"],
                             hover_data=['date_observation'], #labels={'code_station'},
                             opacity = 1, size_max=60, zoom=7.5,
-                            mapbox_style="stamen-terrain", #"carto-positron",text="code_pluviometre",
+                            mapbox_style="carto-positron", #stamen-terrain", #"carto-positron",text="code_pluviometre",
                             animation_frame="date_m_d",
                             width=100, height=700, #pitch=60, bearing=180,
                             range_color=[0, 253] ) #,range_color=[0, 3830137]
